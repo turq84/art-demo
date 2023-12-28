@@ -6,7 +6,7 @@ export type User = {
   last_login_date: string;
 };
 
-export const UserData = [
+export const UserData: User[] = [
   {
     id: 1,
     username: 'john_doe',

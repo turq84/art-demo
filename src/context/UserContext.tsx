@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
 
 import { usePersistedState } from './Context';
-import type { User } from '../data/User';
+import type { User } from '../mockdata/User';
 
 type UserContextValue = {
   user: User | null;
@@ -22,10 +22,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export function useUser() {
+export const useUser = () => {
   const value = useContext(UserContext);
   if (!value) {
     throw Error('useUser should be used inside user context provider');
   }
   return value;
-}
+};

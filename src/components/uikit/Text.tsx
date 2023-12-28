@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Typography, Color, Theme } from '../../constants/theme';
+
+import type { Typography, Color, Theme } from '../../constants/theme';
+import theme from '../../constants/theme';
 
 interface TextProps extends React.ComponentProps<'span'> {
   color?: Color;
@@ -15,9 +17,9 @@ type Tags = keyof JSX.IntrinsicElements;
 
 const TextBase = styled.span<TextProps>`
   margin: 0;
-  color: ${(p) => (p.color ? p.theme.colors[p.color] : 'inherit')};
-  text-align: ${(p) => p.align || 'inherit'};
-  ${(p) => p.theme.typography[p.variant]}
+  color: ${(props) => (props.color ? theme.colors[props.color] : 'inherit')};
+  text-align: ${(props) => props.align || 'inherit'};
+  ${(props) => theme.typography[props.variant]}
 `;
 
 const Text: React.ForwardRefRenderFunction<any, TextProps> = (

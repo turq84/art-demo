@@ -1,8 +1,8 @@
 'use server';
 import * as Z from 'zod';
 
-import type { User } from './data/User';
-import { UserData } from './data/User';
+import type { User } from './mockdata/User';
+import { UserData } from './mockdata/User';
 import { useUser } from './context/UserContext';
 
 // Login action

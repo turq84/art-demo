@@ -30,7 +30,8 @@ const theme = {
   colors: {
     primary: '#000000',
     secondary: '#666',
-    tietary: '#999',
+    tietary: '#FF7582 ',
+    tietaryMuted: '#C56C86',
     border: '#D3D9E3',
     borderMuted: 'rgba(211, 217, 227, 0.5)',
     white: '#FFFFFF',
@@ -94,7 +95,7 @@ const theme = {
     primary: css`
       color: #ffffff;
       background-color: #000000;
-      border-radius: 24px;
+      border-radius: 8px;
       border: none;
       font-family: 'GTWalsheim-Medium', sans-serif;
       line-height: calc(1em + 0.725rem);
@@ -109,7 +110,7 @@ const theme = {
       transition: all 0.15s linear 0s;
 
       &:hover {
-        background-color: #323654;
+        background-color: rgba(0, 0, 0, 0.8);
       }
 
       &:focus {
@@ -125,7 +126,7 @@ const theme = {
     secondary: css`
       color: #000000;
       background-color: #ffffff;
-      border-radius: 24px;
+      border-radius: 8px;
       border: 2px solid #000000;
       font-family: 'GTWalsheim-Medium', sans-serif;
       line-height: calc(1em + 0.725rem);

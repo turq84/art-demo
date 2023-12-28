@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import StyledComponentsRegistry from '../lib/registry';
 import { ContextProvider } from '../context/Context';
+import '../constants/style.css';
 
 export const metadata: Metadata = {
   title: 'Create Next App',

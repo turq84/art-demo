@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { usePathname } from 'next/navigation';
 
 import Header from './Header';
 import { requireUser } from '../utils/auth';
@@ -9,13 +10,18 @@ type Props = {
 };
 
 const Layout = ({ children }: Props) => {
+  // Check if the user is on the login page - there's no need to show the header on the login page
+  const pathname = usePathname();
+  const stripPath = pathname.split('/')[1];
+  const isLoginPage = stripPath === 'login' ? true : false;
+
   React.useEffect(() => {
     requireUser();
   }, []);
 
   return (
     <PageWrapper>
-      <Header />
+      {!isLoginPage && <Header />}
       <Main>{children}</Main>
     </PageWrapper>
   );

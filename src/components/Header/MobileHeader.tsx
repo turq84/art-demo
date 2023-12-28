@@ -9,7 +9,7 @@ import ArtLogo from '../../assets/artLogo.webp';
 import { MOBILE_HEADER_HEIGHT } from '../../constants';
 import { Button, Content, Text } from '../uikit';
 import theme from '../../constants/theme';
-import type { User } from '../../data/User';
+import type { User } from '../../mockdata/User';
 
 type Props = {
   username: User['username'] | string;
@@ -59,35 +59,30 @@ const MobileHeader = ({ username }: Props) => {
         <Nav href='/'>
           <MobileImage src={ArtLogo.toString()} alt='Art Paradise' />
         </Nav>
-        {username && (
-          <IconContainer onClick={toggleMenu}>
-            {showMenu ? (
-              <IoMdClose color={theme.colors.primary} size={30} />
-            ) : (
-              <BiMenu color={theme.colors.primary} size={32} />
-            )}
-          </IconContainer>
-        )}
+        <IconContainer onClick={toggleMenu}>
+          {showMenu ? (
+            <IoMdClose color={theme.colors.primary} size={30} />
+          ) : (
+            <BiMenu color={theme.colors.primary} size={32} />
+          )}
+        </IconContainer>
       </MenuContainer>
-
-      {username && (
-        <MenuContent isOpen={showMenu} className={showMenu ? 'isOpen' : ''}>
-          <ButtonContainer>
-            <Text variant='body' color='secondary'>
-              {username}
-            </Text>
-            <LogoutButton
-              id='logout-button'
-              variant='secondary'
-              varianttype='button'
-              type='submit'
-              size='small'
-            >
-              <IoMdLogOut size={24} color={theme.colors.white} />
-            </LogoutButton>
-          </ButtonContainer>
-        </MenuContent>
-      )}
+      <MenuContent isOpen={showMenu} className={showMenu ? 'isOpen' : ''}>
+        <ButtonContainer>
+          <Text variant='body' color='secondary'>
+            {username}
+          </Text>
+          <LogoutButton
+            id='logout-button'
+            variant='secondary'
+            varianttype='button'
+            type='submit'
+            size='small'
+          >
+            <IoMdLogOut size={24} color={theme.colors.white} />
+          </LogoutButton>
+        </ButtonContainer>
+      </MenuContent>
     </Container>
   );
 };

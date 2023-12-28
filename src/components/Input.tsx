@@ -44,7 +44,7 @@ const Input = forwardRef<HTMLInputElement, Props>(
     const labelId = `${id}-${label}`;
 
     return (
-      <Container axis='y' spacing='normal'>
+      <Container axis='y' spacing='normal' align='left'>
         {!hideLabel && (
           <Stack axis='y' spacing='xsmall'>
             <Label htmlFor={name}>{label}</Label>
@@ -90,25 +90,24 @@ const Container = styled(Stack)`
 
 const InputField = styled.input<{ width: string; hideBorder: boolean }>`
   border: ${(props) =>
-    props.hideBorder ? 'none' : `1px solid ${props.theme.colors.border}`};
+    props.hideBorder ? 'none' : `1px solid ${theme.colors.border}`};
   border-radius: 46px;
   padding: 12px 28px;
   min-width: 300px;
   width: ${(props) => props.width};
-  ${(props) => props.theme.typography.body};
+  ${theme.typography.body};
   outline: 0;
-  transition: all 0.15s linear 0s;
+  transition: all 0.18s linear 0s;
 
   &:focus,
   &:active,
   &:hover {
-    box-shadow: ${(props) => props.theme.colors['magenta-10']} 0px 0px 0px 4px;
-    border: 1px solid ${(props) => props.theme.colors['magenta-50']};
-    transition: all 0.15s linear 0s;
+    border: 1px solid ${theme.colors.primary};
+    transition: all 0.18s linear 0s;
   }
 `;
 
 const Label = styled.label`
-  ${(props) => props.theme.typography.body};
-  color: ${(props) => props.theme.colors.secondary};
+  ${theme.typography.body};
+  color: ${theme.colors.secondary};
 `;

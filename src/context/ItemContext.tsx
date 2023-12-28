@@ -9,12 +9,14 @@ type Item = {
     lqip: string;
     alt_text?: string;
   };
+  userId: number;
 };
 
 interface ItemsContextValue {
   items: Item[];
   setItems: (items: Item[] | null) => void;
-  upsertItem: (item: Item) => void;
+  insertItem: (item: Item) => void;
+  removeItem: (item: Item) => void;
 }
 
 export const ItemContext = createContext<undefined | ItemsContextValue>(
@@ -25,37 +27,49 @@ export const ItemProvider = ({ children }: { children: React.ReactNode }) => {
   const [_items, setItems] = usePersistedState<Item[]>('items_');
   const items = _items || [];
 
-  const upsertItem = (item: Item) => {
+  const insertItem = (item: Item) => {
     const currentItems = [...items];
 
     if (item) {
-      const index = currentItems.findIndex((p) => p.id === item.id);
+      // Check if the art item already exists in the items array and if so, ignore it
+      const itemIndex = currentItems.findIndex(
+        (currentItem) => currentItem.id === item.id
+      );
 
-      if (currentItems.length === 0) {
-        const filteredItems = currentItems.filter(
-          (artItem) => artItem.id !== item.id
-        );
-        setItems(filteredItems);
-      } else if (index !== -1) {
-        currentItems[index] = { ...item };
-        setItems(currentItems);
-      } else {
-        setItems([...currentItems, item]);
+      if (itemIndex !== -1) {
+        // Item already exists, so igoring the item
+        return;
+      }
+
+      setItems([...currentItems, item]);
+    }
+  };
+
+  const removeItem = (id: Item['id']) => {
+    const currentItems = [...items];
+    if (currentItems) {
+      const itemIndex = currentItems.findIndex(
+        (currentItem) => currentItem.id === id
+      );
+      if (itemIndex !== -1) {
+        currentItems.splice(itemIndex, 1);
+        setItems([...currentItems]);
       }
     }
   };
 
   return (
-    <ItemContext.Provider value={{ items, setItems, upsertItem }}>
+    // @ts-ignore
+    <ItemContext.Provider value={{ items, setItems, insertItem, removeItem }}>
       {children}
     </ItemContext.Provider>
   );
 };
 
-export function useItems() {
+export const useItems = () => {
   const value = useContext(ItemContext);
   if (!value) {
     throw Error('useItems should be used inside items context provider');
   }
   return value;
-}
+};

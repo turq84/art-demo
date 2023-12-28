@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import { useFormState, useFormStatus } from 'react-dom';
 import { redirect } from 'next/navigation';
 
-import { useUser } from '../context/UserContext';
-import { loginFormAction } from '../actions';
-import type { User } from '../data/User';
+import { useUser } from '../../context';
+import { loginFormAction } from '../../actions';
+import type { User } from '../../data/User';
+import PageLayout from '../../components/PageLayout';
 
 const Login = () => {
   const { pending } = useFormStatus();
@@ -40,7 +41,7 @@ const Login = () => {
   }, [formState.message, setUser]);
 
   return (
-    <div>
+    <PageLayout>
       {/* TODO: ADD LOGO */}
       status: {user && <div>Logged in as {user.email}</div>}
       <pre style={{ whiteSpace: 'pre-wrap' }}>
@@ -54,7 +55,7 @@ const Login = () => {
           {pending ? 'Loading...' : 'Submit'}
         </button>
       </form>
-    </div>
+    </PageLayout>
   );
 };
 

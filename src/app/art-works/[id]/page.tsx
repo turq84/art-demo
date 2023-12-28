@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import * as Toast from '@radix-ui/react-toast';
 // import { Content, Text } from '../components/common';
 
-import { requireUser } from '../../utils/auth';
+import { requireUser } from '../../../utils/auth';
 
 // TODO: USE THE RADIX TOAST COMPONENT FOR WHEN AN ITEM HAS BEEN ADDED OR REMOVED
 

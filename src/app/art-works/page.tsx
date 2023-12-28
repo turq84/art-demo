@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 // import { Content, Text } from '../components/common';
 
-import { requireUser } from '../utils/auth';
+import { requireUser } from '../../utils/auth';
 
 // TODO: USE THE RADIX TOAST COMPONENT FOR WHEN AN ITEM HAS BEEN ADDED OR REMOVED
 

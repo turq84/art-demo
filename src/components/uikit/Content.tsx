@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+
 import { MAX_CONTENT_WIDTH } from '../../constants';
 import Stack from './Stack';
+import theme from '../../constants/theme';
 
 const Content = styled(Stack)`
   width: 100%;
@@ -8,7 +10,7 @@ const Content = styled(Stack)`
   margin-left: auto;
   margin-right: auto;
 
-  ${(props) => props.theme.media.laptopL} {
+  ${theme.media.laptopL} {
     width: 90%;
   }
 `;

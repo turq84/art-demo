@@ -26,21 +26,21 @@ export const ItemProvider = ({ children }: { children: React.ReactNode }) => {
   const items = _items || [];
 
   const upsertItem = (item: Item) => {
-    const currentitems = [...items];
+    const currentItems = [...items];
 
     if (item) {
-      const index = currentitems.findIndex((p) => p.id === item.id);
+      const index = currentItems.findIndex((p) => p.id === item.id);
 
-      if (currentitems.length === 0) {
-        const filtereditems = currentitems.filter(
+      if (currentItems.length === 0) {
+        const filteredItems = currentItems.filter(
           (artItem) => artItem.id !== item.id
         );
-        setItems(filtereditems);
+        setItems(filteredItems);
       } else if (index !== -1) {
-        currentitems[index] = { ...item };
-        setItems(currentitems);
+        currentItems[index] = { ...item };
+        setItems(currentItems);
       } else {
-        setItems([...currentitems, item]);
+        setItems([...currentItems, item]);
       }
     }
   };

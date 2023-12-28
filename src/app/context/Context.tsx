@@ -1,6 +1,5 @@
 'use client';
-
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import { UserProvider } from './UserContext';
 import { ItemProvider } from './ItemContext';
 
@@ -17,7 +16,7 @@ export const ContextProvider = ({
 };
 
 export function usePersistedState<State>(key: string) {
-  const [state, setState] = useState<null | State>(() => {
+  const [state, setState] = React.useState<null | State>(() => {
     if (typeof window !== 'undefined') {
       const a = localStorage.getItem(key);
 
@@ -33,7 +32,7 @@ export function usePersistedState<State>(key: string) {
     return null;
   });
 
-  return useMemo(
+  return React.useMemo(
     () =>
       [
         state,

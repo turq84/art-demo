@@ -1,9 +1,10 @@
 'use client';
 import React from 'react';
 import styled from 'styled-components';
+import * as Toast from '@radix-ui/react-toast';
 // import { Content, Text } from '../components/common';
 
-import { requireUser } from '../utils/auth';
+import { requireUser } from '../../utils/auth';
 
 // TODO: USE THE RADIX TOAST COMPONENT FOR WHEN AN ITEM HAS BEEN ADDED OR REMOVED
 
@@ -20,11 +21,11 @@ import { requireUser } from '../utils/auth';
 </Toast.Root>
 <Toast.Viewport className="ToastViewport" /> */
 
-const ArtWorks = () => {
+const ArtDetail = () => {
   React.useEffect(() => {
     requireUser();
   }, []);
 
-  return <>ArtWorks</>;
+  return <>Art Details</>;
 };
-export default ArtWorks;
+export default ArtDetail;

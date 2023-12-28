@@ -7,7 +7,7 @@
     "build": "next build",
     "cypress:open": "cypress open",
     "husky:commit-msg": "commitlint --edit",
-    "husky:pre-commit": "echo 'TODO: Add a pre-push hook'",
+    "husky:pre-commit": "lint-staged",
     "husky:pre-push": "echo 'TODO: Add a pre-push hook'",
     "lint": "eslint './src/**/*.{ts,tsx}' --ignore-path .eslintignore --quiet --fix",
     "start": "next start",

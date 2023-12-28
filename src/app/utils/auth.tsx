@@ -1,16 +1,17 @@
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
-import { useUser } from '../context/UserContext';
-import { useItems } from '../context/ItemContext';
+import { useUser, useItems } from '../context';
 
-const { setUser, user } = useUser();
-const { setItems } = useItems();
-
-export const requiredUser = () => {
+// Check that the user is logged in
+export const requireUser = () => {
   try {
+    const { user } = useUser();
+    const router = useRouter();
+
+    // If there is no user, clear the local storage and redirect to login page
     if (!user) {
       logout();
-      redirect('/login');
+      router.push('/login');
     }
   } catch (error) {
     console.error('Error for required user check: ', error);
@@ -20,6 +21,9 @@ export const requiredUser = () => {
 export const logout = () => {
   try {
     if (typeof window !== 'undefined') {
+      const { setUser } = useUser();
+      const { setItems } = useItems();
+
       setUser(null);
       setItems(null);
     }

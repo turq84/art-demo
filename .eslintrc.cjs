@@ -11,13 +11,7 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'prettier',
   ],
-  plugins: [
-    'next/core-web-vitals',
-    '@typescript-eslint',
-    'import',
-    'jsx-a11y',
-    'lodash',
-  ],
+  plugins: ['@typescript-eslint', 'import', 'jsx-a11y', 'lodash'],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',

@@ -90,6 +90,70 @@ const theme = {
         0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
     `,
   },
+  button: {
+    primary: css`
+      color: #ffffff;
+      background-color: #000000;
+      border-radius: 24px;
+      border: none;
+      font-family: 'GTWalsheim-Medium', sans-serif;
+      line-height: calc(1em + 0.725rem);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      width: max-content;
+      min-width: 100px;
+      height: fit-content;
+      text-align: center;
+      cursor: pointer;
+      outline: 0;
+      transition: all 0.15s linear 0s;
+
+      &:hover {
+        background-color: #323654;
+      }
+
+      &:focus {
+        background-color: #323654;
+      }
+
+      &:disabled {
+        background-color: rgba(242, 244, 248, 1);
+        color: #6d7186;
+        cursor: not-allowed;
+      }
+    `,
+    secondary: css`
+      color: #000000;
+      background-color: #ffffff;
+      border-radius: 24px;
+      border: 2px solid #000000;
+      font-family: 'GTWalsheim-Medium', sans-serif;
+      line-height: calc(1em + 0.725rem);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      width: max-content;
+      min-width: 100px;
+      height: fit-content;
+      text-align: center;
+      cursor: pointer;
+      outline: 0;
+      transition: all 0.15s linear 0s;
+
+      &:hover {
+        background-color: rgba(242, 244, 248, 0.7);
+      }
+
+      &:focus {
+        background-color: rgba(242, 244, 248, 0.5);
+      }
+
+      &:disabled {
+        background-color: rgba(242, 244, 248, 1);
+        color: #6d7186;
+        cursor: not-allowed;
+      }
+    `,
+  },
   media,
   typography: {
     'heading-1': css`

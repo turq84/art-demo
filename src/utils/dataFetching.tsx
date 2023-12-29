@@ -4,7 +4,7 @@
 export const fetchArtItems = async () => {
   try {
     const response = await fetch(
-      'https://api.artic.edu/api/v1/artworks?limit=30'
+      'https://api.artic.edu/api/v1/artworks?limit=50'
     );
 
     if (!response.ok) {

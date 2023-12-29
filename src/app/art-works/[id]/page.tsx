@@ -26,6 +26,7 @@ export type ArtDataProps = {
     };
   };
   data: { imageData: [string] };
+  imageData: string;
   imageUrl: string;
 };
 
@@ -113,6 +114,7 @@ const ArtDetail = ({ params }: { params: { id: string } }) => {
           )}
 
           <ContentSection axis='y' spacing='medium'>
+            {/* TODO: IF ITEM HAS BEEN ALREADY CLAIMED, SAY "CLAIMED" INSTEAD OF "CLAIM PIECE" */}
             <Button
               id='claim-art-button'
               variant='primary'

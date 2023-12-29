@@ -73,8 +73,9 @@ const Dashboard = () => {
                     id={item.id}
                     artist_display={item.artist_display}
                     title={item.title}
+                    // @ts-ignore
                     thumbnail={item.thumbnail}
-                    imageUrl={item.imageUrl}
+                    imageUrl={item.imageUrl || ''}
                     handleClick={handleItemDelete}
                   />
                 ))}

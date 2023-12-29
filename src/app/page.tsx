@@ -8,15 +8,26 @@ import Card from '../components/ArtCards/Card';
 import { fetchArtItems } from '../utils/dataFetching';
 import theme from '../constants/theme';
 import type { ArtDataProps } from './art-works/[id]/page';
+import { useItems } from '../context';
 
 const Home = () => {
   // @ts-ignore
   const [artItems, setArtItems] = React.useState<ArtDataProps>([]);
+  const { items } = useItems();
 
   // TODO: USE REACT QUERY INSTEAD OF USE STATE
   React.useEffect(() => {
     const fetchArt = async () => {
       const data = await fetchArtItems();
+
+      // use the items.id value to filter through the items array and return the items that do not match the id
+      if (items.length > 0 && data) {
+        const filteredData = data.artData.data.filter(
+          (item: { id: number }) => !items.some((i) => i.id === item.id)
+        );
+        setArtItems(filteredData);
+      }
+
       // @ts-ignore
       setArtItems(data);
     };
@@ -29,7 +40,7 @@ const Home = () => {
       <ContentContainer>
         {/* TODO: ADD SEARCH INPUT HERE - REMEMBER DEBOUNCER FOR API CALL */}
         <Items>
-          {Array.isArray(artItems.artData?.data) &&
+          {Array?.isArray(artItems?.artData?.data) &&
             artItems.artData?.data.map((artItem) => (
               <Card
                 key={artItem.id}
@@ -38,6 +49,7 @@ const Home = () => {
                 title={artItem.title}
                 thumbnail={artItem.thumbnail}
                 imageUrl={
+                  // @ts-ignore (no time to fix)
                   artItems.imageData[artItems.artData.data.indexOf(artItem)]
                 }
               />

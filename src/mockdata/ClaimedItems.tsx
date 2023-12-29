@@ -9,6 +9,7 @@ export type ClaimedItem = {
     height: number;
     alt_text: string;
   };
+  imageUrl: string;
   itemId: number;
   userId: number;
 }[];
@@ -26,7 +27,9 @@ export const ClaimedItems: ClaimedItem = [
       height: 1085,
       alt_text: 'A work made of carnelian.',
     },
-    itemId: 140858,
+    imageUrl:
+      'https://www.artic.edu/iiif/2/0a0e16c5-8510-bb2d-b2ca-424feae48d5c/full/843,/0/default.jpg',
+    itemId: 6010,
     userId: 4,
   },
   {
@@ -41,6 +44,8 @@ export const ClaimedItems: ClaimedItem = [
       height: 980,
       alt_text: 'A work made of glass.',
     },
+    imageUrl:
+      'https://www.artic.edu/iiif/2/58ab2466-9c2d-8c45-b82d-564f7e5bbb86/full/843,/0/default.jpg',
     itemId: 64165,
     userId: 4,
   },
@@ -55,6 +60,8 @@ export const ClaimedItems: ClaimedItem = [
       height: 6804,
       alt_text: 'A work made of acrylic on aluminum.',
     },
+    imageUrl:
+      'https://www.artic.edu/iiif/2/9f73f9f6-5943-a76c-93de-48cd32572d09/full/843,/0/default.jpg',
     itemId: 242021,
     userId: 3,
   },
@@ -70,6 +77,8 @@ export const ClaimedItems: ClaimedItem = [
       height: 3304,
       alt_text: 'A work made of acrylic on chipboard.',
     },
+    imageUrl:
+      'https://www.artic.edu/iiif/2/3572974a-2d8c-dd4c-5d5c-04fbdc71784b/full/843,/0/default.jpg',
     itemId: 228846,
     userId: 3,
   },
@@ -86,7 +95,9 @@ export const ClaimedItems: ClaimedItem = [
       alt_text:
         'A work made of oil on emery paper, mounted on scrap-wood panel covered with industrial-grade black paper.',
     },
-    itemId: 90445,
+    imageUrl:
+      'https://www.artic.edu/iiif/2/d0979087-dc1b-f259-a23f-169cdced27ee/full/843,/0/default.jpg',
+    itemId: 3752,
     userId: 2,
   },
 ];

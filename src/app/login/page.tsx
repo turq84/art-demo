@@ -43,8 +43,9 @@ const Login = () => {
         ClaimedItems.forEach((item) => {
           if (item.userId === user.id) {
             insertItem({
-              id: item.id,
+              id: item.itemId,
               artist_display: item.artist_display,
+              imageUrl: item.imageUrl,
               title: item.title,
               thumbnail: item.thumbnail,
               userId: user.id,

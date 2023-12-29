@@ -9,6 +9,7 @@ type Item = {
     lqip: string;
     alt_text?: string;
   };
+  imageUrl?: string;
   userId: number;
 };
 

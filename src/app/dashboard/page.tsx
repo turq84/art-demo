@@ -74,7 +74,7 @@ const Dashboard = () => {
                     artist_display={item.artist_display}
                     title={item.title}
                     thumbnail={item.thumbnail}
-                    itemId={item.id}
+                    imageUrl={item.imageUrl}
                     handleClick={handleItemDelete}
                   />
                 ))}

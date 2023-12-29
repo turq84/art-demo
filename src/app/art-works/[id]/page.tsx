@@ -10,30 +10,38 @@ import { useItems, useUser } from '../../../context';
 import Toast from '../../../components/Toast';
 
 export type ArtDataProps = {
-  data: {
-    id: number;
-    artist_display: string;
-    title: string;
-    thumbnail: {
-      lqip: string;
+  artData: {
+    data: {
+      id: number;
+      artist_display: string;
+      title: string;
+      thumbnail: {
+        lqip: string;
+        width: number;
+        height: number;
+      };
+      place_of_origin: string;
+      date_display: string;
+      description: string;
     };
-    place_of_origin: string;
-    date_display: string;
-    description: string;
   };
+  data: { imageData: [string] };
+  imageUrl: string;
 };
 
 const ArtDetail = ({ params }: { params: { id: string } }) => {
   // @ts-ignore
-  const [artItems, setArtItems] = React.useState<ArtDataProps>([]);
+  const [artItem, setArtItem] = React.useState<ArtDataProps>([]);
   const [showToast, setShowToast] = React.useState<boolean>(false);
   const { insertItem } = useItems();
   const { user } = useUser();
 
+  // TODO: USE REACT QUERY INSTEAD OF USE STATE
   React.useEffect(() => {
     const fetchArt = async () => {
       const data = await fetchArtItem(parseInt(params.id));
-      setArtItems(data);
+      // @ts-ignore
+      setArtItem(data);
     };
     fetchArt();
   }, []);
@@ -41,10 +49,11 @@ const ArtDetail = ({ params }: { params: { id: string } }) => {
   const handleClaim = () => {
     if (!user) return;
     insertItem({
-      id: artItems.data?.id,
-      artist_display: artItems.data?.artist_display,
-      title: artItems.data?.title,
-      thumbnail: artItems.data?.thumbnail,
+      id: artItem.artData.data.id,
+      artist_display: artItem.artData.data.artist_display,
+      title: artItem.artData.data.title,
+      thumbnail: artItem.artData.data.thumbnail,
+      imageUrl: artItem.data?.imageData[0],
       userId: user.id,
     });
 
@@ -55,23 +64,23 @@ const ArtDetail = ({ params }: { params: { id: string } }) => {
   const labelContent = [
     {
       label: 'Artist',
-      value: artItems.data?.artist_display || 'Unknown',
+      value: artItem.artData?.data.artist_display || 'Unknown',
     },
     {
       label: 'Title',
-      value: artItems.data?.title || 'Unknown',
+      value: artItem.artData?.data.title || 'Unknown',
     },
     {
       label: 'Origin',
-      value: artItems.data?.place_of_origin || 'Unknown',
+      value: artItem.artData?.data.place_of_origin || 'Unknown',
     },
     {
       label: 'Date',
-      value: artItems.data?.date_display || 'Unknown',
+      value: artItem.artData?.data.date_display || 'Unknown',
     },
     {
       label: 'Description',
-      value: artItems.data?.description || 'Unknown',
+      value: artItem.artData?.data.description || 'Unknown',
     },
   ];
 
@@ -88,12 +97,12 @@ const ArtDetail = ({ params }: { params: { id: string } }) => {
     <PageLayout>
       <ContentContainer>
         <Stack axis='x' justify='space-between' spacing='xlarge'>
-          {artItems.data?.thumbnail ? (
+          {artItem.artData?.data?.thumbnail ? (
             <ArtImage
-              src={artItems.data.thumbnail.lqip}
-              alt={artItems.data.title}
-              width={1}
-              height={1}
+              src={artItem.imageUrl}
+              alt={artItem.artData?.data.title}
+              width={artItem.artData?.data?.thumbnail?.width || 300}
+              height={artItem.artData?.data?.thumbnail?.height || 300}
             />
           ) : (
             <PlaceholderBox>

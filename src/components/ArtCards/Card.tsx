@@ -12,18 +12,26 @@ import theme from '../../constants/theme';
 type Props = {
   artist_display: string;
   id: number;
-  itemId: number;
+  imageUrl: string;
   thumbnail: {
     lqip: string;
+    width: number;
+    height: number;
   };
   title: string;
 };
 
-const Card = ({ artist_display, itemId, thumbnail, title }: Props) => {
+const Card = ({ artist_display, id, thumbnail, title, imageUrl }: Props) => {
   return (
-    <ItemCardContainer href={`/art-works/${itemId}`}>
-      {thumbnail?.lqip ? (
-        <ArtImage src={thumbnail.lqip} alt={title} width={1} height={1} />
+    <ItemCardContainer href={`/art-works/${id}`}>
+      {imageUrl ? (
+        <ArtImage
+          src={imageUrl}
+          alt={title}
+          width={thumbnail?.width || 300}
+          height={thumbnail?.height || 300}
+          blurDataURL={thumbnail.lqip || ''} // preview image
+        />
       ) : (
         <PlaceholderBox>
           <Text variant='body' color='primary'>
@@ -35,9 +43,7 @@ const Card = ({ artist_display, itemId, thumbnail, title }: Props) => {
         <Text variant='body-small' color='secondary'>
           {artist_display}
         </Text>
-        <Title variant='body' color='primary'>
-          {title}
-        </Title>
+        <Title href={`/art-works/${id}`}>{title}</Title>
       </ItemCard>
     </ItemCardContainer>
   );
@@ -52,8 +58,9 @@ const ItemCardContainer = styled(Link)`
   transition: all 0.18ss linear 0s;
 
   &:hover {
-    ${theme.shadows.medium};
-    transition: all 0.18s linear 0s;
+    a {
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -77,10 +84,17 @@ const PlaceholderBox = styled.div`
   align-items: center;
 `;
 
-const Title = styled(Text)`
+const Title = styled(Link)`
+  text-decoration: none;
+  ${theme.typography.body};
+  color: ${theme.colors.primary};
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;

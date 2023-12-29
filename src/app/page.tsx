@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { Content } from '../components/uikit';
 import PageLayout from '../components/PageLayout';
 import Card from '../components/ArtCards/Card';
-import type { ClaimedItem } from '../mockdata/ClaimedItems';
 import { fetchArtItems } from '../utils/dataFetching';
 import theme from '../constants/theme';
 import type { ArtDataProps } from './art-works/[id]/page';
@@ -14,11 +13,14 @@ const Home = () => {
   // @ts-ignore
   const [artItems, setArtItems] = React.useState<ArtDataProps>([]);
 
+  // TODO: USE REACT QUERY INSTEAD OF USE STATE
   React.useEffect(() => {
     const fetchArt = async () => {
       const data = await fetchArtItems();
+      // @ts-ignore
       setArtItems(data);
     };
+
     fetchArt();
   }, []);
 
@@ -26,19 +28,20 @@ const Home = () => {
     <PageLayout>
       <ContentContainer>
         {/* TODO: ADD SEARCH INPUT HERE - REMEMBER DEBOUNCER FOR API CALL */}
-
         <Items>
-          {/* @ts-ignore */}
-          {artItems.data?.map((item) => (
-            <Card
-              key={item.id}
-              id={item.id}
-              artist_display={item.artist_display}
-              title={item.title}
-              thumbnail={item.thumbnail}
-              itemId={item.id}
-            />
-          ))}
+          {Array.isArray(artItems.artData?.data) &&
+            artItems.artData?.data.map((artItem) => (
+              <Card
+                key={artItem.id}
+                id={artItem.id}
+                artist_display={artItem.artist_display}
+                title={artItem.title}
+                thumbnail={artItem.thumbnail}
+                imageUrl={
+                  artItems.imageData[artItems.artData.data.indexOf(artItem)]
+                }
+              />
+            ))}
         </Items>
       </ContentContainer>
     </PageLayout>

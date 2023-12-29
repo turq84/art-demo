@@ -100,6 +100,7 @@ const Container = styled.nav<{ stuck: boolean }>`
     props.stuck ? theme.colors.white : 'transparent'};
   ${(props) => props.stuck && theme.shadows.small};
   transition: all 200ms ease-in-out;
+  margin-top: -${theme.sizing.small};
 
   ${theme.media.tablet} {
     display: none;

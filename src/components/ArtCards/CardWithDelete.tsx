@@ -5,7 +5,7 @@ import { MdDeleteForever } from 'react-icons/md';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { Text } from '../../components/uikit';
+import { Text, Stack } from '../../components/uikit';
 import theme from '../../constants/theme';
 
 // TODO: ADD A HOVER AFFECT FOR THE IMAGE - WHEN HOVERING, SHOW THE DESCRIPTION OF THE ARTWORK WITH A DARKER BACKGROUND
@@ -14,12 +14,12 @@ type Props = {
   artist_display: string;
   handleClick: (id: number) => void;
   id: number;
-  itemId: number;
-  thumbnail:
-    | {
-        lqip: string;
-      }
-    | undefined;
+  imageUrl: string;
+  thumbnail: {
+    lqip: string;
+    width: number;
+    height: number;
+  };
   title: string;
 };
 
@@ -27,18 +27,23 @@ const CardWithDelete = ({
   artist_display,
   handleClick,
   id,
-  itemId,
   thumbnail,
   title,
+  imageUrl,
 }: Props) => {
   return (
-    <ItemCardContainer href={`/art-works/${itemId}`}>
+    <ItemCardContainer axis='y'>
       <DeleteButton onClick={() => handleClick(id)} title='Delete'>
         <MdDeleteForever size={18} color={theme.colors.primary} />
       </DeleteButton>
-
-      {thumbnail?.lqip ? (
-        <ArtImage src={thumbnail.lqip} alt={title} width={1} height={1} />
+      {imageUrl ? (
+        <ArtImage
+          src={imageUrl}
+          alt={title}
+          width={thumbnail?.width || 300}
+          height={thumbnail?.height || 300}
+          blurDataURL={thumbnail.lqip || ''} // preview image
+        />
       ) : (
         <PlaceholderBox>
           <Text variant='body' color='primary'>
@@ -50,26 +55,23 @@ const CardWithDelete = ({
         <Text variant='body-small' color='secondary'>
           {artist_display}
         </Text>
-        <Text variant='body' color='primary'>
-          {title}
-        </Text>
+        <Title href={`/art-works/${id}`}>{title}</Title>
       </ItemCard>
     </ItemCardContainer>
   );
 };
 export default CardWithDelete;
 
-const ItemCardContainer = styled(Link)`
-  display: flex;
-  flex-direction: column;
+const ItemCardContainer = styled(Stack)`
   position: relative;
   text-decoration: none;
   z-index: 0;
   transition: all 0.18ss linear 0s;
 
   &:hover {
-    ${theme.shadows.medium};
-    transition: all 0.18s linear 0s;
+    a {
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -107,4 +109,19 @@ const PlaceholderBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const Title = styled(Link)`
+  text-decoration: none;
+  ${theme.typography.body};
+  color: ${theme.colors.primary};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
